@@ -1,6 +1,16 @@
 /*global Backbone:false, _: false, console: false*/
-
-(function(Backbone, _) {
+(function(factory) {
+    if (typeof define === 'function' && define.amd) {
+        // Register as an AMD module if available...
+        define(['backbone', 'underscore'], factory);
+    } else if (typeof exports === 'object') {
+        // Next for Node.js, CommonJS, browserify...
+        factory(require('backbone'), require('underscore'));
+    } else {
+        // Browser globals for the unenlightened...
+        factory(Backbone, _);
+    }
+}(function(Backbone, _) {
 
   // Save a reference to the original route method to be called
   // after we pave it over.
@@ -115,4 +125,4 @@
 
   });
 
-}(Backbone, _));
+}));
